@@ -21,11 +21,20 @@ def path_creation(path_to_create):
         print("file already exist")
 
 
-# def file_creation(f_name,f_path):
-    # with open(f_path,"w", encoding="utf-8")
+def file_creation(f_path: str, iterator: str):
+    file_path = os.path.join(f_path, f"{iterator}.txt")
+    new_file = open(file_path, "a", encoding="utf-8")
+    new_file.close()
+
+
+def service_op(a: str, itr: int):
+    check_existance(a)
+    path_creation(a)
+    file_creation(a, str(itr))
 
 
 source_file = Path(path)
+i = 1
 with open(source_file, "r", encoding="utf-8") as file:
     for line in file:
         if line.endswith('\n'):
@@ -33,10 +42,10 @@ with open(source_file, "r", encoding="utf-8") as file:
             new_path = line[0]
             print(new_path)
             # new_path.encode('utf-8')
-            check_existance(new_path)
-            path_creation(new_path)
+            service_op(new_path, i)
+            i += 1
         else:
             new_path = line
             print(new_path)
-            check_existance(new_path)
-            path_creation(new_path)
+            service_op(new_path, i)
+            i += 1
